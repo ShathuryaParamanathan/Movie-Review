@@ -1,11 +1,11 @@
 import "./App.css";
 import Header from "./Header";
-import Nav from "./Nav";
+import Nav from "./Component/Nav";
 import Home from "./Home";
 import Missing from "./Missing";
 import NewPost from "./NewPost";
 import PostPage from "./PostPage";
-import Post from "./Post";
+import Post from "./Component/Post";
 import PostLayout from "./PostLayout";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
-import Feed from './Feed';
+import Feed from './Component/Feed';
 
 const Home = ({ posts }) => {
   return (
