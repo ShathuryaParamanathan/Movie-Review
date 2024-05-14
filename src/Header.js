@@ -1,12 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { Typography, AppBar, Toolbar } from '@mui/material';
 
-const Header = ({title}) => {
+const Header = ({ title }) => {
   return (
-    <header>{title}</header>
-  )
-}
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+          {title}
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-Header.defaultProps={
-    title:"App"
-  }
-export default Header
+Header.defaultProps = {
+  title: "App"
+};
+
+export default Header;
