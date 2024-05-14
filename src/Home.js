@@ -1,22 +1,19 @@
-import React from 'react'
-import Feed from './Feed'
+import React from 'react';
+import { Typography, Box } from '@mui/material';
+import Feed from './Feed';
 
-const Home = ({posts}) => {
+const Home = ({ posts }) => {
   return (
-    <div>
-        {posts.length ?  (
-            <Feed posts={posts} /> ) :(
-                <p style ={{marginTop:"2rem"}}>
-                    No Posts to display
+    <Box p={2}>
+      {posts.length ? (
+        <Feed posts={posts} />
+      ) : (
+        <Typography variant="body1" sx={{ marginTop: '2rem' }}>
+          No Posts to display
+        </Typography>
+      )}
+    </Box>
+  );
+};
 
-                </p>
-            )
-       }
-  
-        
-
-    </div>
-  )
-}
-
-export default Home
+export default Home;
