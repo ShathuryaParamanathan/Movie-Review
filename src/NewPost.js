@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Grid, Card, CardContent, CardMedia, MenuItem, FormControl, Select, InputLabel } from '@mui/material';
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  MenuItem,
+  FormControl,
+  Select,
+  InputLabel,
+} from "@mui/material";
 
 const NewPost = () => {
-  const [movieTitle, setMovieTitle] = useState('');
-  const [reviewContent, setReviewContent] = useState('');
-  const [movieCategory, setMovieCategory] = useState('');
+  const [movieTitle, setMovieTitle] = useState("");
+  const [reviewContent, setReviewContent] = useState("");
+  const [movieCategory, setMovieCategory] = useState("");
   const [image, setImage] = useState(null);
-  const [rating, setRating] = useState(0); // Add rating state
+  const [rating, setRating] = useState(0);
 
   const handleMovieTitleChange = (e) => {
     setMovieTitle(e.target.value);
@@ -33,17 +47,31 @@ const NewPost = () => {
     setImage(null);
   };
 
-  const handlePostSubmit = () => {
-    // Handle review submission logic here
-    console.log('Movie Title:', movieTitle);
-    console.log('Review Content:', reviewContent);
-    console.log('Movie Category:', movieCategory);
-    console.log('Rating:', rating); // Log rating
-    console.log('Image:', image);
-  };
+  const handlePostSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/newReview",
+        {
+          movieTitle,
+          reviewContent,
+          movieCategory,
+          rating,
+          image,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error posting movie review:", error);
+    }
+  };
   return (
-    <Container maxWidth="md" sx={{ marginTop: '2rem' }}>
+    <Container maxWidth="md" sx={{ marginTop: "2rem" }}>
       <Typography variant="h4" align="center" gutterBottom>
         Write a Movie Review
       </Typography>
@@ -83,7 +111,6 @@ const NewPost = () => {
               <MenuItem value="Comedy">Comedy</MenuItem>
               <MenuItem value="Drama">Drama</MenuItem>
               <MenuItem value="Thriller">Thriller</MenuItem>
-             
             </Select>
           </FormControl>
         </Grid>
@@ -115,23 +142,27 @@ const NewPost = () => {
                   height="140"
                   image={URL.createObjectURL(image)}
                   alt="Uploaded Image"
-                  style={{ marginBottom: '1rem' }}
+                  style={{ marginBottom: "1rem" }}
                 />
               )}
               <input
                 accept="image/*"
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 id="contained-button-file"
                 type="file"
                 onChange={handleImageChange}
               />
               <label htmlFor="contained-button-file">
                 <Button variant="contained" component="span">
-                  {image ? 'Change Image' : 'Upload Image'}
+                  {image ? "Change Image" : "Upload Image"}
                 </Button>
               </label>
               {image && (
-                <Button variant="outlined" onClick={handleImageRemove} style={{ marginLeft: '1rem' }}>
+                <Button
+                  variant="outlined"
+                  onClick={handleImageRemove}
+                  style={{ marginLeft: "1rem" }}
+                >
                   Remove Image
                 </Button>
               )}
@@ -139,7 +170,11 @@ const NewPost = () => {
           </Card>
         </Grid>
         <Grid item xs={12} align="center">
-          <Button variant="contained" color="primary" onClick={handlePostSubmit}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handlePostSubmit}
+          >
             Post Review
           </Button>
         </Grid>

@@ -1,0 +1,22 @@
+.home-header {
+    background-color: #282c34;
+    padding: 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .home-features {
+    margin: 20px;
+  }
+  
+  .home-features ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .home-features li {
+    background: #61dafb;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }

@@ -1,12 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonIcon from '@mui/icons-material/Person';
 
-const Nav = ({ search, setSearch }) => {
+const Nav = ({ search, setSearch, isLoggedIn }) => {
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    navigate("/signin");
+  };
+
   return (
     <Grid container alignItems="center" justifyContent="space-between" sx={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
       <Grid item>
@@ -38,9 +44,13 @@ const Nav = ({ search, setSearch }) => {
               <AddCircleIcon /> New Post
             </Link>
           </li>
-          <li>
-            <Button variant="contained" startIcon={<PersonIcon />}>Login</Button>
-          </li>
+          {isLoggedIn ? (
+            <li>
+              <Button variant="contained" startIcon={<PersonIcon />} >User</Button>
+            </li>
+          ) : (
+            <Button variant="contained" startIcon={<PersonIcon />} onClick={handleSignIn}>Signin</Button>
+          )}
         </ul>
       </Grid>
     </Grid>
