@@ -50,7 +50,7 @@ const NewPost = () => {
   const handlePostSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/review/newReview",
+        "http://localhost:5000/newReview",
         {
           movieTitle,
           reviewContent,

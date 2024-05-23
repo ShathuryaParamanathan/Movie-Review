@@ -1,15 +1,18 @@
 import "./App.css";
 import Header from "./Header";
-import Nav from "./Component/Nav";
-import Home from "./Home";
+import Nav from "./Component/Nav/Nav";
+import Home from "./Pages/Home";
 import Missing from "./Missing";
 import NewPost from "./NewPost";
 import PostPage from "./PostPage";
 import Post from "./Component/Post";
 import PostLayout from "./PostLayout";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Notification from "./Notification";
+import SignUp from "./Pages/SignUp";
+import SignIn from "./Pages/SignIn";
+import Intro from "./Component/Intro";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -61,10 +64,7 @@ function App() {
       body: "When the menace known as The Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
       imageSrc: "https://th.bing.com/th/id/R.34df6b287faf65b160b47e05ba85bb3b?rik=o5LsP1up4eGlXA&pid=ImgRaw&r=0"
     },
-    
   ]);
-
-  const [search, setSearch] = useState("");
 
   // Function to update post data
   const updatePostData = (postId, updatedData) => {
@@ -73,13 +73,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header title=" Movie Review App" />
-      <Nav search={search} setSearch={setSearch} />
-
+      <Header title="Movie Review App" />
       <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
+        <Route path="/" element={<Intro />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/home" element={<Home posts={posts} />} />
         <Route path="/notification" element={<Notification />} />
-        <Route path="/NewPost" element={<NewPost />} />
+        <Route path="/newpost" element={<NewPost />} />
         <Route path="/postpage" element={<PostLayout />}>
           <Route index element={<PostPage />} />
           <Route path=":id" element={<Post />} />

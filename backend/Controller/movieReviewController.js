@@ -1,5 +1,6 @@
 const MovieReview = require("../Model/MovieReviewModel");
-// const bcrypt = require("bcrypt");
+const User = require("../Model/UserModel");
+const bcrypt = require("bcrypt");
 
 const getAllReview = async (req, res) => {
   try {
